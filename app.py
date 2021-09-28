@@ -55,7 +55,7 @@ def createRandList(options):
     
 
 """
-READ DOCX
+READ DOC
 Takes in the name of a Microsoft Word Document and puts it in a big string
 Variables:    
     filename - The name of the Word Document being read in
@@ -67,7 +67,14 @@ def readDoc(filename):
         fullText.append(para.text)
     return '\n'.join(fullText)
 
-def getLines(filename):
+
+"""
+GET LINES DOCX
+Takes the Docx file, pulls out the text, seperates it into individual lines,
+and gets rid of empty lines. 
+    filename - The name of the Word Document being read in
+"""
+def getLinesDocx(filename):
     # Call the readtxt function to store the docx string
     fullText = readDoc(filename)
 
@@ -78,21 +85,59 @@ def getLines(filename):
     lines = list(filter(None, lines))
     return lines
 
+"""
+GET LINES TXT
+Takes the Docx file, pulls out the text, seperates it into individual lines,
+and gets rid of empty lines. 
+    filename - The name of the Word Document being read in
+"""
+def getLinesTxt(filename):
+    # Call the readtxt function to store the docx string
+    file = open(filename)
+    
+    # Split the text line by line
+    lines = file.readlines()
+
+    file.close()
+
+    # Get rid of the empty lines
+    lines = list(filter(None, lines))
+    
+    # Get rid of newLine characters and leading and trailing spaces
+    stripLines = []
+
+    for element in lines:
+        stripLines.append(element.strip())
+
+    return stripLines
+
+
 
 # Get some lines from a file
-lines = getLines('dating_pass_along_card.docx')
+lines = getLinesDocx('dating_pass_along_card_v1.1.docx')
 
-# Our intro will be the first 3 lines
-intro = lines[0:3]
+# Our intro will be the first 2 lines
+intro = lines[0:2]
 
-# Our options will be everything after the first 3 lines
-options = lines[3:len(lines)]
 
-# Take our list of options and randomize it
+
+
+# Get Variable text from files
+excuses = getLinesTxt("variableText/excuse.txt")
+name = getLinesTxt('variableText/name.txt')
+phone = getLinesTxt('variableText/phone.txt')
+username = getLinesTxt('variableText/username.txt')
+bad = getLinesTxt('variableText/bad.txt')
+options = getLinesDocx('variableText/options.docx')
+
+
+# Randomize the lists that need randomizing
+randExcuses = createRandList(excuses)
+randBad = createRandList(bad)
 randOptions = createRandList(options)
 
 # Take in our cards template
-template = DocxTemplate("card_template.docx")
+template = DocxTemplate("card_template_v1.1.docx")
 
 # We can replace variables in the template with the text that we want
 # So we don't have to write it all out by hand...
@@ -104,7 +149,27 @@ template = DocxTemplate("card_template.docx")
 # for i in range(len(randOptions)):
 #     varName = 'option' + str(i)
 
-context = { 'option0'  : randOptions[0],
+context = { 'intro'    : intro[0] + intro[1],
+            'excuse0'  : randExcuses[0],
+            'excuse1'  : randExcuses[1],
+            'excuse2'  : randExcuses[2],
+            'excuse3'  : randExcuses[3],
+            'excuse4'  : randExcuses[4],
+            'excuse5'  : randExcuses[5],
+            'excuse6'  : randExcuses[6],
+            'excuse7'  : randExcuses[7],
+            'name'     : name[0],
+            'phone'    : phone[0],
+            'username' : username[0],
+            'bad0'     : randBad[0],
+            'bad1'     : randBad[1],
+            'bad2'     : randBad[2],
+            'bad3'     : randBad[3],
+            'bad4'     : randBad[4],
+            'bad5'     : randBad[5],
+            'bad6'     : randBad[6],
+            'bad7'     : randBad[7],
+            'option0'  : randOptions[0],
             'option1'  : randOptions[1],
             'option2'  : randOptions[2],
             'option3'  : randOptions[3],
