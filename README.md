@@ -6,7 +6,7 @@ It all starts with a template for the cards in Microsoft Word. The structure of 
 
 Here's a video of how the software functions.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://www.youtube.com/watch?v=UN-gQ2Kbbos)
 
 # Development Environment
 
