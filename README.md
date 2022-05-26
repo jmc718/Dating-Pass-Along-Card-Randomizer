@@ -10,7 +10,7 @@ Here's a video of how the software functions.
 
 # Development Environment
 
-The template was, of course, created in Microsoft Word. All of the magic to make something of that template ont he other hand was done in Python. I used Visual Studio Code as my IDE and used the following libraries:
+The template was, of course, created in Microsoft Word. All of the magic to make something of that template on the other hand was done in Python. I used Visual Studio Code as my IDE and used the following libraries:
 - docx
 - docxtpl
 - random
